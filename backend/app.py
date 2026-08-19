@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import pymysql
 
@@ -7,10 +8,10 @@ app = Flask(__name__)
 # DATABASE CONFIGURATION
 # ==============================
 
-DB_HOST = "student-db.cdu6wimkivp3.ap-southeast-2.rds.amazonaws.com"
-DB_USER = "student_admin"
-DB_PASSWORD = "admin123"
-DB_NAME = "student_db"
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_NAME = os.getenv("DB_NAME", "student_db")
 
 
 def get_connection():
@@ -207,25 +208,21 @@ def delete_course(course_id):
     try:
         with connection.cursor() as cursor:
 
-            # Delete dependent attendance
             cursor.execute("""
                 DELETE FROM attendance
                 WHERE course_id = %s
             """, (course_id,))
 
-            # Delete dependent marks
             cursor.execute("""
                 DELETE FROM marks
                 WHERE course_id = %s
             """, (course_id,))
 
-            # Delete subjects
             cursor.execute("""
                 DELETE FROM subjects
                 WHERE course_id = %s
             """, (course_id,))
 
-            # Delete course
             cursor.execute("""
                 DELETE FROM courses
                 WHERE course_id = %s
@@ -619,6 +616,7 @@ def update_student(student_id):
             })
 
     except pymysql.err.IntegrityError:
+
         connection.rollback()
 
         return jsonify({
