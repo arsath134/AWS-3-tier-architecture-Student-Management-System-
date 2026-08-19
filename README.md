@@ -63,33 +63,31 @@ The application is deployed on AWS using a 3-tier architecture with separate fro
                                   │    :3306               │
                                   └────────────────────────┘
 
+                                     SECURITY GROUP FLOW
 
-SECURITY GROUP FLOW
+                                          Internet
+                                              │
+                                              ▼
+                                            ALB-SG
+                                       :80 / :443
+                                        │
+                                        ├──────────────► Frontend-SG :80
+                                        │
+                                        └──────────────► Backend-SG :5000
+                                        │
+                                        ▼
+                                  RDS-SG :3306
 
-Internet
-   │
-   ▼
-ALB-SG
-  :80 / :443
-   │
-   ├──────────────► Frontend-SG :80
-   │
-   └──────────────► Backend-SG :5000
-                         │
-                         ▼
-                    RDS-SG :3306
+                                      ROUTE TABLES
 
+                                    Public Route Table
+                                           │
+                                           ├── 12.0.0.0/21 → local
+                                           └── 0.0.0.0/0   → Internet Gateway
 
-ROUTE TABLES
-
-Public Route Table
-    │
-    ├── 12.0.0.0/21 → local
-    └── 0.0.0.0/0   → Internet Gateway
-
-Private Route Table
-    │
-    └── 12.0.0.0/21 → local
+                                   Private Route Table
+                                           │
+                                           └── 12.0.0.0/21 → local
 
 ### Tiers
 
