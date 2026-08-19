@@ -5,24 +5,94 @@ A web-based Student Management System built using HTML, CSS, JavaScript, Python 
 The application is deployed on AWS using a 3-tier architecture with separate frontend, backend, and database layers.
 
 ## Architecture
+## AWS 3-Tier Architecture
 
-                         Internet
-                            │
-                            ▼
-              Application Load Balancer
-                     Public Subnet
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-              ▼                           ▼
-       Frontend EC2                  Backend EC2
-       Private Subnet               Private Subnet
-                                  "student-backend"
-                                          │
-                                          ▼
-                                   Amazon RDS
-                                      MySQL
-                                  Private Subnet
+                              INTERNET
+                                  │
+                                  ▼
+                        ┌──────────────────┐
+                        │ Internet Gateway │
+                        └────────┬─────────┘
+                                 │
+═════════════════════════════════╪══════════════════════════════════
+                         VPC: 12.0.0.0/21
+═════════════════════════════════╪══════════════════════════════════
+                                 │
+                    ┌────────────▼────────────┐
+                    │      PUBLIC SUBNET      │
+                    │                         │
+                    │  Route Table            │
+                    │  0.0.0.0/0 → IGW        │ 
+                    │                         │
+                    │  ┌────────────────────┐ │
+                    │  │ Application Load   │ │
+                    │  │ Balancer           │ │
+                    │  │ SG: ALB-SG         │ │
+                    │  │ :80 / :443         │ │
+                    │  └─────────┬──────────┘ │
+                    └────────────┼────────────┘
+                                 │
+                         ┌───────▼────────┐
+                         │  TARGET GROUPS │
+                         └───────┬────────┘
+                           ┌─────┴─────┐
+                           │           │
+                 ┌─────────▼───┐   ┌───▼──────────────┐
+                 │ FRONTEND TG │   │  BACKEND TG      │
+                 │    :80      │   │     :5000        │
+                 └──────┬──────┘   └──────┬───────────┘
+                        │                 │
+════════════════════════╪═════════════════╪════════════════════════
+                        │  PRIVATE SUBNETS │
+                        │                 │
+              ┌─────────▼──────┐   ┌──────▼─────────────┐
+              │  FRONTEND EC2  │   │    BACKEND EC2     │
+              │                │   │                    │
+              │  HTML/CSS/JS   │   │ student-backend    │
+              │  :80           │   │ Flask API :5000    │
+              │                │   │                    │
+              │  Frontend-SG   │   │ Backend-SG         │
+              └────────────────┘   └──────────┬─────────┘
+                                               │
+                                               │ :3306
+                                               ▼
+                                  ┌────────────────────────┐
+                                  │    PRIVATE DB SUBNET   │
+                                  │                        │
+                                  │    RDS-SG              │
+                                  │                        │
+                                  │    Amazon RDS MySQL    │
+                                  │    student_db          │
+                                  │    :3306               │
+                                  └────────────────────────┘
+
+
+SECURITY GROUP FLOW
+
+Internet
+   │
+   ▼
+ALB-SG
+  :80 / :443
+   │
+   ├──────────────► Frontend-SG :80
+   │
+   └──────────────► Backend-SG :5000
+                         │
+                         ▼
+                    RDS-SG :3306
+
+
+ROUTE TABLES
+
+Public Route Table
+    │
+    ├── 12.0.0.0/21 → local
+    └── 0.0.0.0/0   → Internet Gateway
+
+Private Route Table
+    │
+    └── 12.0.0.0/21 → local
 
 ### Tiers
 
