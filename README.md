@@ -14,9 +14,7 @@ The application is deployed on AWS using a 3-tier architecture with separate fro
                         │ Internet Gateway │
                         └────────┬─────────┘
                                  │
-═════════════════════════════════╪══════════════════════════════════
                          VPC: 12.0.0.0/21
-═════════════════════════════════╪══════════════════════════════════
                                  │
                     ┌────────────▼────────────┐
                     │      PUBLIC SUBNET      │
@@ -42,8 +40,7 @@ The application is deployed on AWS using a 3-tier architecture with separate fro
                  │    :80      │   │     :5000        │
                  └──────┬──────┘   └──────┬───────────┘
                         │                 │
-════════════════════════╪═════════════════╪════════════════════════
-                        │  PRIVATE SUBNETS │
+                        │ PRIVATE SUBNETS │
                         │                 │
               ┌─────────▼──────┐   ┌──────▼─────────────┐
               │  FRONTEND EC2  │   │    BACKEND EC2     │
