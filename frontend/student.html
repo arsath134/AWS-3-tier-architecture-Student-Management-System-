@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="css/student.css">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Student Portal
+    </div>
+
+    <nav>
+        <button class="nav-btn active" onclick="showSection('dashboard')">
+            Dashboard
+        </button>
+
+        <button class="nav-btn" onclick="showSection('profile')">
+            My Profile
+        </button>
+
+        <button class="nav-btn" onclick="showSection('marks')">
+            My Marks
+        </button>
+
+        <button class="nav-btn" onclick="showSection('attendance')">
+            My Attendance
+        </button>
+    </nav>
+
+    <button class="logout-btn" onclick="logout()">
+        Logout
+    </button>
+
+</aside>
+
+
+<main class="main-content">
+
+    <header class="topbar">
+
+        <div>
+            <h1>Student Dashboard</h1>
+            <p>Welcome to your student portal</p>
+        </div>
+
+        <div class="student-info">
+            <span id="studentUsername">Student</span>
+        </div>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="content-section">
+
+        <h2>Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Student Name</h3>
+                <p id="dashboardName">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Roll Number</h3>
+                <p id="dashboardRollNo">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Course</h3>
+                <p id="dashboardCourse">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Overall Attendance</h3>
+                <p id="dashboardAttendance">-</p>
+            </div>
+
+            <div class="card">
+                <h3>Average Marks</h3>
+                <p id="dashboardAverageMarks">-</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section id="profile" class="content-section hidden">
+
+        <h2>My Profile</h2>
+
+        <div class="profile-card">
+
+            <div class="profile-row">
+                <strong>Username</strong>
+                <span id="profileUsername">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Name</strong>
+                <span id="profileName">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Roll Number</strong>
+                <span id="profileRollNo">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Email</strong>
+                <span id="profileEmail">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Course</strong>
+                <span id="profileCourse">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Department</strong>
+                <span id="profileDepartment">-</span>
+            </div>
+
+            <div class="profile-row">
+                <strong>Age</strong>
+                <span id="profileAge">-</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MARKS -->
+
+    <section id="marks" class="content-section hidden">
+
+        <h2>My Marks</h2>
+
+        <div class="summary-card">
+
+            <div>
+                <span>Total Subjects</span>
+                <strong id="totalSubjects">0</strong>
+            </div>
+
+            <div>
+                <span>Average Marks</span>
+                <strong id="averageMarks">0</strong>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+
+                <tbody id="marksTableBody">
+
+                    <tr>
+                        <td colspan="3">
+                            Loading marks...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+
+    <section id="attendance" class="content-section hidden">
+
+        <h2>My Attendance</h2>
+
+        <div class="summary-card">
+
+            <div>
+                <span>Total Classes</span>
+                <strong id="totalClasses">0</strong>
+            </div>
+
+            <div>
+                <span>Attended</span>
+                <strong id="presentClasses">0</strong>
+            </div>
+
+            <div>
+                <span>Absent</span>
+                <strong id="absentClasses">0</strong>
+            </div>
+
+            <div>
+                <span>Overall Percentage</span>
+                <strong id="attendancePercentage">0%</strong>
+            </div>
+
+        </div>
+
+
+        <h3 class="section-title">
+            Subject-wise Attendance
+        </h3>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Subject</th>
+                        <th>Total Classes</th>
+                        <th>Attended</th>
+                        <th>Absent</th>
+                        <th>Percentage</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceTableBody">
+
+                    <tr>
+                        <td colspan="5">
+                            Loading attendance...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="js/config.js"></script>
+<script src="js/student.js"></script>
+
+</body>
+</html>
