@@ -5,7 +5,7 @@ A web-based Student Management System built using HTML, CSS, JavaScript, Python 
 The application is deployed on AWS using a 3-tier architecture with separate frontend, backend, and database layers.
 
 ## Architecture
-## AWS 3-Tier Architecture
+
 
                               INTERNET
                                   │
