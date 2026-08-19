@@ -1,1 +1,340 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #222;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+
+    background: #1f2937;
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-btn {
+    border: none;
+    background: transparent;
+    color: #d1d5db;
+
+    padding: 13px 15px;
+
+    text-align: left;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: #374151;
+    color: white;
+}
+
+.logout-btn {
+    margin-top: auto;
+
+    border: none;
+
+    padding: 13px;
+
+    border-radius: 7px;
+
+    background: #dc2626;
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* MAIN */
+
+.main-content {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+
+/* TOPBAR */
+
+.topbar {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.topbar h1 {
+    margin-bottom: 7px;
+}
+
+.topbar p {
+    color: #6b7280;
+}
+
+.student-info {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+
+/* SECTIONS */
+
+.content-section {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.hidden {
+    display: none;
+}
+
+.content-section h2 {
+    margin-bottom: 25px;
+}
+
+
+/* DASHBOARD CARDS */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(190px, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    padding: 22px;
+
+    border-radius: 10px;
+}
+
+.card h3 {
+    font-size: 15px;
+
+    color: #6b7280;
+
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* PROFILE */
+
+.profile-card {
+    max-width: 700px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+.profile-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 17px 20px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-row span {
+    color: #4b5563;
+}
+
+
+/* SUMMARY */
+
+.summary-card {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(160px, 1fr));
+
+    gap: 50px;
+
+    margin-bottom: 30px;
+}
+
+.summary-card div {
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    cell-padding: 40px;
+
+    padding: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+.summary-card span {
+    color: #6b7280;
+
+    font-size: 20px;
+}
+
+.summary-card strong {
+    font-size: 23px;
+}
+
+
+/* TABLE */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 600px;
+}
+
+th,
+td {
+    padding: 14px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    text-align: left;
+}
+
+th {
+    background: #f9fafb;
+
+    font-size: 14px;
+}
+
+td {
+    font-size: 14px;
+}
+
+.section-title {
+    margin-bottom: 15px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+
+        overflow-x: auto;
+    }
+
+    .logout-btn {
+        margin-top: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+
+        padding: 15px;
+    }
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .profile-row {
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+}
